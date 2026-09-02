@@ -199,6 +199,7 @@ els.siteAccess.addEventListener('click', async () => {
     announce(hasSiteAccess
       ? 'Website access enabled — your saved themes now apply automatically'
       : 'Website access was not enabled', !hasSiteAccess);
+    if (hasSiteAccess && Number.isInteger(activeTab?.id)) await chrome.tabs.reload(activeTab.id);
   } catch (error) {
     announce(error.message || 'Website access could not be enabled', true);
   }
