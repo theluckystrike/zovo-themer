@@ -49,6 +49,12 @@ for (const file of walk(root)) {
   let text = readFileSync(file, 'utf8');
   const before = text;
   text = text.replace(rx, match => replacements.get(match));
+  // The minifier can place two nested block braces together in Stylelint.
+  // Separate that executable token so the release placeholder gate does not
+  // mistake it for an unexpanded {{template}} marker.
+  if (basename(file) === `${marker}stylelint.js`) {
+    text = text.replace('function(e){{const', 'function(e){ {const');
+  }
   if (text !== before) writeFileSync(file, text);
 }
 
