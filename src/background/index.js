@@ -109,6 +109,10 @@ chrome.runtime.onInstalled.addListener(({reason, previousVersion}) => {
   onStartup();
 });
 
+if (__.MV3 && chrome.permissions?.onAdded) {
+  chrome.permissions.onAdded.addListener(() => reinjectContentScripts());
+}
+
 if (__.MV3) {
   chrome.storage.session.get('init', async ({init}) => {
     __.DEBUGLOG('new session:', !init);

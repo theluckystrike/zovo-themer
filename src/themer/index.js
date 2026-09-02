@@ -12,7 +12,8 @@ const els = {
   ruleEditor: $('#atm8-rule-editor'), selector: $('#atm8-selector'),
   property: $('#atm8-property'), targetColor: $('#atm8-target-color'),
   targetRadius: $('#atm8-target-radius'), removeRule: $('#atm8-remove-rule'),
-  pick: $('#atm8-pick'), export: $('#atm8-export'), status: $('#atm8-status'),
+  pick: $('#atm8-pick'), export: $('#atm8-export'), siteAccess: $('#atm8-site-access'),
+  status: $('#atm8-status'),
   pricing: $('#atm8-pricing'), planBadge: $('#atm8-plan-badge'),
   planCopy: $('#atm8-plan-copy'), keyToggle: $('#atm8-key-toggle'),
   licenseForm: $('#atm8-license-form'), license: $('#atm8-license'),
@@ -24,6 +25,13 @@ let state;
 let profile;
 let saveTimer;
 let saveChain = Promise.resolve();
+let hasSiteAccess = false;
+
+async function refreshSiteAccess() {
+  hasSiteAccess = await chrome.permissions.contains({origins: ['<all_urls>']});
+  els.siteAccess.disabled = hasSiteAccess;
+  els.siteAccess.textContent = hasSiteAccess ? 'Website access enabled' : 'Enable on websites';
+}
 
 function announce(message, error = false) {
   els.status.textContent = message;
@@ -182,6 +190,19 @@ els.export.addEventListener('click', async () => {
     announce(error.message, true);
   }
 });
+els.siteAccess.addEventListener('click', async () => {
+  try {
+    els.siteAccess.disabled = true;
+    announce('Choose Allow to enable themes on websites');
+    hasSiteAccess = await chrome.permissions.request({origins: ['<all_urls>']});
+    await refreshSiteAccess();
+    announce(hasSiteAccess
+      ? 'Website access enabled — your saved themes now apply automatically'
+      : 'Website access was not enabled', !hasSiteAccess);
+  } catch (error) {
+    announce(error.message || 'Website access could not be enabled', true);
+  }
+});
 els.keyToggle.addEventListener('click', () => {
   const open = els.licenseForm.hidden;
   els.licenseForm.hidden = !open;
@@ -206,7 +227,7 @@ els.deactivate.addEventListener('click', async () => {
   announce('License removed from this device');
 });
 
-load().catch(error => {
+Promise.all([load(), refreshSiteAccess()]).catch(error => {
   els.shell.setAttribute('aria-busy', 'false');
   announce(error.message || 'Open a website to begin', true);
 });

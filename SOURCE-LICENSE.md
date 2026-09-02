@@ -6,9 +6,9 @@ prepared at:
 
 https://github.com/theluckystrike/zovo-themer
 
-The prepared `v1.0.0` tag identifies the source for this package. Publish that
-tag before distributing this binary. The release handoff also includes an
-exact `Zovo-Themer-1.0.0-source.tar.gz` source archive. The upstream base is
+The public `v1.0.0` tag identifies the source for this package. The release
+handoff also includes an exact `Zovo-Themer-1.0.0-source.tar.gz` source
+archive. The upstream base is
 `openstyles/stylus@69c894d9c03512e2133dbfb842d7532dd1751164`.
 
 The packaged `GPL-3.0-LICENSE.txt` file contains the GNU General Public
