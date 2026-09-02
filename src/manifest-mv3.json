@@ -20,11 +20,6 @@
   },
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
-      "js": ["js/themer-apply.js"],
-      "run_at": "document_start"
-    },
-    {
       "matches": ["https://greasyfork.org/*scripts/*", "https://sleazyfork.org/*scripts/*"],
       "js": ["js/install-hook-greasyfork.js"],
       "run_at": "document_start"

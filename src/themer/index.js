@@ -194,6 +194,7 @@ els.siteAccess.addEventListener('click', async () => {
     els.siteAccess.disabled = true;
     announce('Choose Allow to enable themes on websites');
     hasSiteAccess = await chrome.permissions.request({origins: ['<all_urls>']});
+    if (hasSiteAccess) hasSiteAccess = await API.themer.enableSiteAccess();
     await refreshSiteAccess();
     announce(hasSiteAccess
       ? 'Website access enabled — your saved themes now apply automatically'

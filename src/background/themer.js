@@ -16,6 +16,19 @@ const PRICING_URL = 'https://zovo.one/pricing';
 const KEY_PATTERN = /^ZOVO-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/;
 const OFFLINE_GRACE_MS = 7 * 24 * 60 * 60 * 1000;
 const FREE_RULE_LIMIT = 1;
+const SITE_ORIGINS = ['<all_urls>'];
+const SITE_SCRIPT_IDS = ['zovo-style-engine', 'zovo-visual-profile'];
+const SITE_SCRIPTS = [
+  {
+    id: SITE_SCRIPT_IDS[0], matches: SITE_ORIGINS, js: ['js/apply.js'],
+    runAt: 'document_start', allFrames: true, matchOriginAsFallback: true,
+    persistAcrossSessions: true,
+  },
+  {
+    id: SITE_SCRIPT_IDS[1], matches: SITE_ORIGINS, js: ['js/themer-apply.js'],
+    runAt: 'document_start', persistAcrossSessions: true,
+  },
+];
 
 const DEFAULT_PROFILE = Object.freeze({
   enabled: true,
@@ -26,6 +39,27 @@ const DEFAULT_PROFILE = Object.freeze({
   comfort: {contrast: false, spacing: false, systemFont: false},
   targets: [],
 });
+
+async function syncSiteScripts(enabled) {
+  if (!__.MV3 || !chrome.scripting?.getRegisteredContentScripts) return;
+  const registered = await chrome.scripting.getRegisteredContentScripts({ids: SITE_SCRIPT_IDS});
+  if (registered.length) {
+    await chrome.scripting.unregisterContentScripts({ids: registered.map(item => item.id)});
+  }
+  if (enabled) await chrome.scripting.registerContentScripts(SITE_SCRIPTS);
+}
+
+if (__.MV3) {
+  chrome.permissions.contains({origins: SITE_ORIGINS})
+    .then(granted => syncSiteScripts(granted))
+    .catch(console.error);
+  chrome.permissions.onAdded.addListener(permissions => {
+    if (permissions.origins?.includes('<all_urls>')) syncSiteScripts(true).catch(console.error);
+  });
+  chrome.permissions.onRemoved.addListener(permissions => {
+    if (permissions.origins?.includes('<all_urls>')) syncSiteScripts(false).catch(console.error);
+  });
+}
 
 function normalizeHost(raw) {
   try {
@@ -265,6 +299,12 @@ export const themerApi = {
     const armed = await chrome.tabs.sendMessage(tabId, {data: {method: PICK_START}});
     if (armed?.ok !== true) throw new Error('Enable website access, then reload this page');
     return {ok: true};
+  },
+  async enableSiteAccess() {
+    const granted = await chrome.permissions.contains({origins: SITE_ORIGINS});
+    if (!granted) return false;
+    await syncSiteScripts(true);
+    return true;
   },
   async activateLicense(key) {
     return verifyLicense(key);

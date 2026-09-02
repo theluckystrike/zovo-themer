@@ -65,6 +65,11 @@ const manifestFile = join(root, 'manifest.json');
 const manifest = JSON.parse(readFileSync(manifestFile, 'utf8'));
 manifest.permissions = manifest.permissions.filter(permission =>
   permission !== 'webRequestBlocking');
+// MV3's optional <all_urls> grant must not be defeated by a static broad
+// content-script declaration. The service worker registers these scripts
+// dynamically only after the user grants website access.
+manifest.content_scripts = manifest.content_scripts.filter(script =>
+  !(script.matches?.length === 1 && script.matches[0] === '<all_urls>'));
 writeFileSync(manifestFile, JSON.stringify(manifest, null, 2) + '\n');
 
 console.log(`uniquified ${mapping.length} JS/CSS assets with ${marker} basenames`);
