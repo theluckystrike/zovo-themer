@@ -714,10 +714,10 @@
     "message": "편집기 컨텍스트 메뉴에 '삭제' 추가"
   },
   "optionsAdvancedExposeIframes": {
-    "message": "<iframe>을 <html[stylus-iframe]>으로 노출"
+    "message": "<iframe>을 <html[atelier8d1-iframe]>으로 노출"
   },
   "optionsAdvancedExposeIframesNote": {
-    "message": "최상위 사이트 도메인을 각 iframe에 노출합니다.\n다음과 같이 iframe용 CSS를 작성할 수 있습니다:\nhtml[stylus-iframe$$=\"twitter.com\"] h1 { display:none }"
+    "message": "최상위 사이트 도메인을 각 iframe에 노출합니다.\n다음과 같이 iframe용 CSS를 작성할 수 있습니다:\nhtml[atelier8d1-iframe$$=\"twitter.com\"] h1 { display:none }"
   },
   "optionsAdvancedPatchCsp": {
     "message": "스타일 자원을 허용하도록 <CSP>패치하기"

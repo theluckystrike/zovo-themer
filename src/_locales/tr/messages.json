@@ -447,7 +447,7 @@
     "message": "Editör bağlam menüsüne 'Sil' seçeneği ekle"
   },
   "optionsAdvancedExposeIframes": {
-    "message": "<html[stylus-iframe]> vasıtasıyla <iframe>'leri gösterin"
+    "message": "<html[atelier8d1-iframe]> vasıtasıyla <iframe>'leri gösterin"
   },
   "optionsBadgeDisabled": {
     "message": "Etkin değilken arkaplan rengi"

@@ -363,7 +363,7 @@ summary {
 }
 
 html:not(.all-disabled) {
-  & body:not(#stylus-popup) #disableAll-label:not([data-persist]) {
+  & body:not(#atm8-library-popup) #disableAll-label:not([data-persist]) {
     display: none;
   }
   & #disableAll-label::after {

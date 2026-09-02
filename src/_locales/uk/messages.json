@@ -795,10 +795,10 @@
     "message": "Додати «Видалити» в контекстне меню редактора"
   },
   "optionsAdvancedExposeIframes": {
-    "message": "Виявляти <iframe> шляхом додавання <html[stylus-iframe]>"
+    "message": "Виявляти <iframe> шляхом додавання <html[atelier8d1-iframe]>"
   },
   "optionsAdvancedExposeIframesNote": {
-    "message": "Встановлює верхній домен сайту в кожному iframe.\nДозволяє писати специфічний для iframe CSS на кшталт:\nhtml[stylus-iframe$$=\"twitter.com\"] h1 { display:none }"
+    "message": "Встановлює верхній домен сайту в кожному iframe.\nДозволяє писати специфічний для iframe CSS на кшталт:\nhtml[atelier8d1-iframe$$=\"twitter.com\"] h1 { display:none }"
   },
   "optionsAdvancedExposeStyleName": {
     "message": "Виставляти назву стиля"

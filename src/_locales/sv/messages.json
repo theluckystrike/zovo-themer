@@ -675,10 +675,10 @@
     "message": "Lägg till \"Ta bort\" i redigeringsmenyn"
   },
   "optionsAdvancedExposeIframes": {
-    "message": "Exponera <iframe> via <html[stylus-iframe]>"
+    "message": "Exponera <iframe> via <html[atelier8d1-iframe]>"
   },
   "optionsAdvancedExposeIframesNote": {
-    "message": "Exponerar toppdomänen i varje iframe.\nAktiverar skriva Iframe-specifik CSS så här:\nhtml[stylus-iframe$$=\"twitter.com\"] h1 { display:none }"
+    "message": "Exponerar toppdomänen i varje iframe.\nAktiverar skriva Iframe-specifik CSS så här:\nhtml[atelier8d1-iframe$$=\"twitter.com\"] h1 { display:none }"
   },
   "optionsBadgeDisabled": {
     "message": "Bakgrundsfärg när inaktiverad"

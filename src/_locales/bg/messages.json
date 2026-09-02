@@ -289,7 +289,7 @@
     "message": "Добавяне на 'Изтриване' в контекстното меню на редактора"
   },
   "optionsAdvancedExposeIframes": {
-    "message": "Разкриване на <iframe> чрез <html[stylus-iframe]>"
+    "message": "Разкриване на <iframe> чрез <html[atelier8d1-iframe]>"
   },
   "optionsBadgeDisabled": {
     "message": "Цвят на фона, когато е изключено"

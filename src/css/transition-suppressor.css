@@ -6,7 +6,7 @@
    * It was fixed by crrev.com/886802 in Chrome 93, which we detect via `accent-color`.
    * Using an increased specificity to override sane selectors in user styles.
    * Using \1 to simplify js code because \0 is converted to \xFFFD per spec. */
-  html#stylus #header *:not(#transition-suppressor) {
+  html#atm8-library-root #header *:not(#transition-suppressor) {
     transition: none !important;
   }
 }

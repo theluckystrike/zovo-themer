@@ -818,10 +818,10 @@
     "message": "\"Löschen\" im Editor-Kontextmenü hinzufügen"
   },
   "optionsAdvancedExposeIframes": {
-    "message": "Ermögliche <iframe> via <html[stylus-iframe]>"
+    "message": "Ermögliche <iframe> via <html[atelier8d1-iframe]>"
   },
   "optionsAdvancedExposeIframesNote": {
-    "message": "Style wirkt sich auch auf iframes der anvisierten (obersten) Domain aus.\nIframe-spezifisches CSS ist dann wie folgt möglich:\nhtml[stylus-iframe$$=\"twitter.com\"] h1 { display:none }"
+    "message": "Style wirkt sich auch auf iframes der anvisierten (obersten) Domain aus.\nIframe-spezifisches CSS ist dann wie folgt möglich:\nhtml[atelier8d1-iframe$$=\"twitter.com\"] h1 { display:none }"
   },
   "optionsAdvancedExposeStyleName": {
     "message": "Stylename anzeigen"

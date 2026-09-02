@@ -143,7 +143,7 @@ export default function MozSectionWidget(cm, finder = MozSectionFinder(cm)) {
   }
 
   function onRuntimeMessage(m) {
-    if (m.reason === 'editPreview' && !$id(`stylus-${m.style.id}`)) {
+    if (m.reason === 'editPreview' && !$id(`atelier8d1-style-${m.style.id}`)) {
       // no style element with this id means the style doesn't apply to the editor URL
       return;
     }

@@ -219,7 +219,7 @@ function updateDisableAll() {
 }
 
 function updateExposeIframes() {
-  const attr = 'stylus-iframe';
+  const attr = 'atelier8d1-iframe';
   const el = document.documentElement;
   if (!el) return; // got no styles so styleInjector didn't wait for <html>
   if (!own.cfg.top || !styleInjector.list.length) {

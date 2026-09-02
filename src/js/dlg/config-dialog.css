@@ -16,7 +16,7 @@
   #message-box-buttons {
     padding: calc(var(--pad)/2) var(--padR) calc(var(--pad)/2) var(--padL);
   }
-  #stylus-popup & {
+  #atm8-library-popup & {
     > div {
       top: auto;
       right: auto;
@@ -37,7 +37,7 @@
   position: relative;
   text-align: right;
   font-size: 0.9em;
-  #stylus-popup & {
+  #atm8-library-popup & {
     top: -.25em;
   }
 }

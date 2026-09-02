@@ -918,10 +918,10 @@
     "message": "إضافة 'حذف' في قائمة سياق المحرر"
   },
   "optionsAdvancedExposeIframes": {
-    "message": "فضح iframes عبر HTML[stylus-iframe]"
+    "message": "فضح iframes عبر HTML[atelier8d1-iframe]"
   },
   "optionsAdvancedExposeIframesNote": {
-    "message": "يكشف عن نطاق الموقع العلوي في كل iframe.\nيمكن من كتابة CSS محدد لـ iframe مثل هذا:\nhtml[stylus-iframe$$=\"twitter.com\"] h1 { display:none }"
+    "message": "يكشف عن نطاق الموقع العلوي في كل iframe.\nيمكن من كتابة CSS محدد لـ iframe مثل هذا:\nhtml[atelier8d1-iframe$$=\"twitter.com\"] h1 { display:none }"
   },
   "optionsAdvancedExposeStyleName": {
     "message": "فضح اسم النمط"

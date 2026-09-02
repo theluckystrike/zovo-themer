@@ -1,4 +1,4 @@
 import hookUsoPage from './hook-uso-page';
 
-addEventListener('stylus-uso*', e => hookUsoPage(e.detail), {once: true});
-dispatchEvent(new Event('stylus-uso'));
+addEventListener('atelier8d1-uso*', e => hookUsoPage(e.detail), {once: true});
+dispatchEvent(new Event('atelier8d1-uso'));

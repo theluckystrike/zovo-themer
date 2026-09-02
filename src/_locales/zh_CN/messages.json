@@ -923,10 +923,10 @@
     "message": "向编辑器右键菜单添加“删除”"
   },
   "optionsAdvancedExposeIframes": {
-    "message": "通过 <html[stylus-iframe]> 暴露 <iframe> 的父页面"
+    "message": "通过 <html[atelier8d1-iframe]> 暴露 <iframe> 的父页面"
   },
   "optionsAdvancedExposeIframesNote": {
-    "message": "为每个 iframe 的 <html> 元素设置 <stylus-iframe> 属性，暴露其顶层网站的域名。\n　\n可用于编写包含或排除特定网站上的 iframe 的 CSS，例如：\n　\n</* 仅对显示在推特上的 iframe 隐藏 h1 元素 */\nhtml[stylus-iframe$$=“twitter.com”] h1 { display:none }\n\nhtml:not([stylus-iframe]) { /* 不应用于任何 iframe 的样式 */ }>\n　\n译注：具体实现参考 https://github.com/openstyles/stylus/blob/bb26734a5424954b621b2580051ad3ff47567fe6/src/content/apply.js#L220"
+    "message": "为每个 iframe 的 <html> 元素设置 <atelier8d1-iframe> 属性，暴露其顶层网站的域名。\n　\n可用于编写包含或排除特定网站上的 iframe 的 CSS，例如：\n　\n</* 仅对显示在推特上的 iframe 隐藏 h1 元素 */\nhtml[atelier8d1-iframe$$=“twitter.com”] h1 { display:none }\n\nhtml:not([atelier8d1-iframe]) { /* 不应用于任何 iframe 的样式 */ }>\n　\n译注：具体实现参考 https://github.com/openstyles/stylus/blob/bb26734a5424954b621b2580051ad3ff47567fe6/src/content/apply.js#L220"
   },
   "optionsAdvancedExposeStyleName": {
     "message": "暴露样式名称"

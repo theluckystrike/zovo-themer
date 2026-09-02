@@ -452,7 +452,7 @@ async function exportToFile(e, styles, suffix = '') {
   const today = new Date();
   $create('a', {
     href: URL.createObjectURL(new Blob([text], {type})),
-    download: 'stylus-' + // YYYY-MM-DD-HH-mm
+    download: 'themer-backup-' + // YYYY-MM-DD-HH-mm
       today.toLocaleString('sv').replace(/[\s:]/g, '-').slice(0, -3) + suffix + '.json',
     type,
   }).dispatchEvent(new MouseEvent('click'));

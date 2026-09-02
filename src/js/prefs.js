@@ -30,7 +30,7 @@ const defaults = {
   __proto__: null,
   // TODO: sort everything aphabetically
   [pDisableAll]: false,            // boss key
-  [pExposeIframes]: false,         // Add 'stylus-iframe' attribute to HTML element in all iframes
+  [pExposeIframes]: false,         // Add the private iframe marker to HTML in all iframes
   [pExposeIframes + '.sites']: '',
   [pExposeIframes + '.sitesOnly']: false,
   'exposeStyleName': false,       // Add style name to the style for better devtools experience

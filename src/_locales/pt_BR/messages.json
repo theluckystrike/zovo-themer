@@ -854,7 +854,7 @@
     "message": "Adicionar 'Eliminar' no menu de contexto do editor"
   },
   "optionsAdvancedExposeIframes": {
-    "message": "Expor <iframe>s via <html[stylus-iframe]>"
+    "message": "Expor <iframe>s via <html[atelier8d1-iframe]>"
   },
   "optionsAdvancedExposeStyleName": {
     "message": "Expor o nome do estilo"

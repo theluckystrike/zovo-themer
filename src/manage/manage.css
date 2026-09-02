@@ -667,7 +667,7 @@ button i {
   font-family: var(--family), icons; /* 'icons' is secondary so its metrics don't skew the text */
 }
 
-.stylus-options {
+.atm8-embedded-options {
   position: fixed;
   top: 0;
   left: 0;

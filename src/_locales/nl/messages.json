@@ -890,10 +890,10 @@
     "message": "‘Verwijderen’ toevoegen in contextmenu van editor"
   },
   "optionsAdvancedExposeIframes": {
-    "message": "<iframe>s blootleggen via <html[stylus-iframe]>"
+    "message": "<iframe>s blootleggen via <html[atelier8d1-iframe]>"
   },
   "optionsAdvancedExposeIframesNote": {
-    "message": "Legt het bovenliggende domein van de website bloot in elk iframe.\nSchakelt schrijven in voor iframe-specifieke CSS, zoals:\nhtml[stylus-iframe$$=\"twitter.com\"] h1 { display:none }"
+    "message": "Legt het bovenliggende domein van de website bloot in elk iframe.\nSchakelt schrijven in voor iframe-specifieke CSS, zoals:\nhtml[atelier8d1-iframe$$=\"twitter.com\"] h1 { display:none }"
   },
   "optionsAdvancedExposeStyleName": {
     "message": "Stijlnaam tonen"

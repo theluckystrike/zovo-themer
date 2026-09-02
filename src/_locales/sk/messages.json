@@ -882,10 +882,10 @@
     "message": "Pridať „Odstrániť“ do kontextovej ponuky editora"
   },
   "optionsAdvancedExposeIframes": {
-    "message": "Sprístupniť <iframe> cez <html[stylus-iframe]>"
+    "message": "Sprístupniť <iframe> cez <html[atelier8d1-iframe]>"
   },
   "optionsAdvancedExposeIframesNote": {
-    "message": "Sprístupní doménu hlavnej stránky v každom iframe.\nUmožňuje písať CSS špecifické pre iframe, napríklad:\nhtml[stylus-iframe$$=\"twitter.com\"] h1 { display:none }"
+    "message": "Sprístupní doménu hlavnej stránky v každom iframe.\nUmožňuje písať CSS špecifické pre iframe, napríklad:\nhtml[atelier8d1-iframe$$=\"twitter.com\"] h1 { display:none }"
   },
   "optionsAdvancedExposeStyleName": {
     "message": "Sprístupniť názov štýlu"

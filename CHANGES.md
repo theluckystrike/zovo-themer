@@ -17,7 +17,9 @@ Zovo Themer is based on openstyles/stylus commit
 ## Technical changes
 
 - Added isolated `atm8-` DOM/CSS identifiers and `atelier8d1` storage,
-  message and webpack runtime identifiers.
+  message, iframe marker and webpack runtime identifiers.
+- Replaced inherited page-root IDs and internal page-event names with the fork's
+  private namespace.
 - Renamed packaged JavaScript and CSS assets to unique `atelier-` basenames.
 - Added a Chrome MV3 content layer for applying generated visual profiles.
 - Added a fail-closed license verifier. Only an exact server response of
@@ -33,4 +35,7 @@ Zovo Themer is based on openstyles/stylus commit
 
 The full modified source remains GPL-3.0-only. Original copyright notices,
 license text and existing source headers are retained. New Zovo Themer files
-carry a modification notice where appropriate.
+carry a modification notice where appropriate. The Free/Pro boundary is not
+technical anti-circumvention: GPL recipients can modify, rebuild and
+redistribute the corresponding source, including a build with that boundary
+changed or removed.

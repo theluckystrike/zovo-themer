@@ -536,7 +536,7 @@
     "message": "Přidat tlačítko Smazat do kontextové nabídky v editoru"
   },
   "optionsAdvancedExposeIframes": {
-    "message": "Obnažit <iframe> prvky pomocí <html[stylus-iframe]>"
+    "message": "Obnažit <iframe> prvky pomocí <html[atelier8d1-iframe]>"
   },
   "optionsBadgeDisabled": {
     "message": "Barva pozadí při zakázání"

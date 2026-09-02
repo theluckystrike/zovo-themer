@@ -155,7 +155,7 @@ function setUrlParams(url, opts) {
       u.searchParams.delete(key);
     }
   }
-  u.hash = opts.options ? '#stylus-options' : '';
+  u.hash = opts.options ? '#atm8-options' : '';
   return u.href;
 }
 

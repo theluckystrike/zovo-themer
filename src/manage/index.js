@@ -34,7 +34,7 @@ import '@/css/target-site.css';
     for (const el of $$(selectorOpts))
       el.on('click', () => location.assign(`/options.html?${kSidebar}#${el.id}`));
   } else {
-    router.makeToggle(selectorOpts, 'stylus-options', EmbeddedOptions);
+    router.makeToggle(selectorOpts, 'atm8-embedded-options', EmbeddedOptions);
   }
   router.makeToggle('#injection-order-button', 'injection-order', InjectionOrder);
   router.makeToggle('#update-history-button', 'update-history', UpdateHistory);

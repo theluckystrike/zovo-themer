@@ -27,7 +27,7 @@ export default async function configDialog(style, y) {
     return;
 
   init(false, false);
-  const isPopup = document.body.id === 'stylus-popup';
+  const isPopup = document.body.id === 'atm8-library-popup';
   const colorpicker = vars.some(v => v.type === 'color')
     ? ColorPicker()
     : null;

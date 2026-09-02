@@ -891,10 +891,10 @@
     "message": "エディタのコンテキストメニューに「削除」を追加する"
   },
   "optionsAdvancedExposeIframes": {
-    "message": "<html[stylus-iframe]> によって<iframe>へのアクセスを可能にする"
+    "message": "<html[atelier8d1-iframe]> によって<iframe>へのアクセスを可能にする"
   },
   "optionsAdvancedExposeIframesNote": {
-    "message": "各iframeにトップサイトドメインを公開します。\n次のようにiframe用のCSSを書くことができるようになります:\nhtml[stylus-iframe$$=\"twitter.com\"] h1 { display:none }"
+    "message": "各iframeにトップサイトドメインを公開します。\n次のようにiframe用のCSSを書くことができるようになります:\nhtml[atelier8d1-iframe$$=\"twitter.com\"] h1 { display:none }"
   },
   "optionsAdvancedExposeStyleName": {
     "message": "スタイル名を公開"

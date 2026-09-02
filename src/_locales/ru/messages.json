@@ -877,10 +877,10 @@
     "message": "Показывать команду \"Удалить\" в контекстном меню редактора"
   },
   "optionsAdvancedExposeIframes": {
-    "message": "Выявлять <iframe> путём добавления <html[stylus-iframe]>"
+    "message": "Выявлять <iframe> путём добавления <html[atelier8d1-iframe]>"
   },
   "optionsAdvancedExposeIframesNote": {
-    "message": "Выставляет верхний домен сайта в каждом iframe.\nПозволяет писать iframe-specific CSS следующим образом:\nhtml[stylus-iframe$$=\"twitter.com\"] h1 { display:none }"
+    "message": "Выставляет верхний домен сайта в каждом iframe.\nПозволяет писать iframe-specific CSS следующим образом:\nhtml[atelier8d1-iframe$$=\"twitter.com\"] h1 { display:none }"
   },
   "optionsAdvancedExposeStyleName": {
     "message": "Проставлять имя стиля"

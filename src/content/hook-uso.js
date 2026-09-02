@@ -13,8 +13,8 @@ let gesture = NaN;
 let pageLoading;
 
 if (__.MV3) {
-  addEventListener('stylus-uso',
-    () => dispatchEvent(new CustomEvent('stylus-uso*', {detail: pageId})),
+  addEventListener('atelier8d1-uso',
+    () => dispatchEvent(new CustomEvent('atelier8d1-uso*', {detail: pageId})),
     {once: true});
 } else {
   runInPage(hookUsoPage, pageId);

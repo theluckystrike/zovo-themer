@@ -21,7 +21,7 @@
   background-color: var(--c95);
   border-color: var(--c85);
 }
-#stylus#stylus .CodeMirror {
+#atm8-library-root#atm8-library-root .CodeMirror {
   /* Using a specificity hack to override userstyles */
   /* Not using the ring-color hack as it became ugly in new Chrome */
   outline: none !important;

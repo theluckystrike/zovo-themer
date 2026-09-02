@@ -849,10 +849,10 @@
     "message": "Ajouter « Supprimer » dans le menu contextuel de l’extension"
   },
   "optionsAdvancedExposeIframes": {
-    "message": "Exposer les <iframe>s via <html[stylus-iframe]>"
+    "message": "Exposer les <iframe>s via <html[atelier8d1-iframe]>"
   },
   "optionsAdvancedExposeIframesNote": {
-    "message": "Expose le domaine principal dans chaque iframe.\nPermet d’écrire du CSS spécifique aux iframe tel que :\nhtml[stylus-iframe$$=\"twitter.com\"] h1 { display:none }"
+    "message": "Expose le domaine principal dans chaque iframe.\nPermet d’écrire du CSS spécifique aux iframe tel que :\nhtml[atelier8d1-iframe$$=\"twitter.com\"] h1 { display:none }"
   },
   "optionsAdvancedExposeStyleName": {
     "message": "Afficher le nom du style"

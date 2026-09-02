@@ -521,10 +521,10 @@
     "message": "הוספת 'מחק' בתפריט העורך"
   },
   "optionsAdvancedExposeIframes": {
-    "message": "חשוף iframes באמצעות HTML [stylus-iframe]"
+    "message": "חשוף iframes באמצעות HTML [atelier8d1-iframe]"
   },
   "optionsAdvancedExposeIframesNote": {
-    "message": "חושף את תחום האתר העליון בכל iframe.\nמאפשר כתיבת CSS ספציפית ל־iframe כך:\nhtml[stylus-iframe$$=\"twitter.com\"] h1 { display:none }"
+    "message": "חושף את תחום האתר העליון בכל iframe.\nמאפשר כתיבת CSS ספציפית ל־iframe כך:\nhtml[atelier8d1-iframe$$=\"twitter.com\"] h1 { display:none }"
   },
   "optionsBadgeDisabled": {
     "message": "צבע רקע בעת השבתה"

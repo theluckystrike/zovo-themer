@@ -868,10 +868,10 @@
     "message": "Προσθήκη του κουμπιού «Διαγραφή» στο μενού περιβάλλοντος του επεξεργαστή κειμένου"
   },
   "optionsAdvancedExposeIframes": {
-    "message": "Πρόσβαση σε <iframe> μέσω <html[stylus-iframe]>"
+    "message": "Πρόσβαση σε <iframe> μέσω <html[atelier8d1-iframe]>"
   },
   "optionsAdvancedExposeIframesNote": {
-    "message": "Επιτρέπει την πρόσβαση στο top site domain σε κάθε iframe.\nΕπιτρέπει τη συγγραφή κώδικα CSS για iframe, η οποία είναι δυνατή ως εξής:\nhtml[stylus-iframe$$=\"twitter.com\"] h1 { display:none }"
+    "message": "Επιτρέπει την πρόσβαση στο top site domain σε κάθε iframe.\nΕπιτρέπει τη συγγραφή κώδικα CSS για iframe, η οποία είναι δυνατή ως εξής:\nhtml[atelier8d1-iframe$$=\"twitter.com\"] h1 { display:none }"
   },
   "optionsAdvancedExposeStyleName": {
     "message": "Πρόσβαση στο όνομα του στυλ"

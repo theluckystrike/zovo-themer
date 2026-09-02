@@ -34,6 +34,11 @@ This complete modified source is licensed under GPL-3.0-only. Changes from the
 upstream base are recorded in [CHANGES.md](./CHANGES.md); upstream copyright
 notices and file headers are preserved.
 
+The Free/Pro distinction is a product configuration, not technical
+anti-circumvention. GPL recipients may inspect, modify, rebuild and redistribute
+the complete corresponding source under GPL-3.0, including builds with a
+different or removed feature boundary.
+
 ## Upstream project history
 
 The project is based on the upstream openstyles/stylus codebase. The historical

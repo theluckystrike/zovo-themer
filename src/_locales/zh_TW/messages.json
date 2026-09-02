@@ -926,10 +926,10 @@
     "message": "在編輯器的右鍵選單中加入「刪除」"
   },
   "optionsAdvancedExposeIframes": {
-    "message": "透過 <html[stylus-iframe]> 公開 <iframe>"
+    "message": "透過 <html[atelier8d1-iframe]> 公開 <iframe>"
   },
   "optionsAdvancedExposeIframesNote": {
-    "message": "公開每個 iframe 中的頂級頁面網域。\n啟用編寫特別用於 iframe 的 CSS，如這個：\nhtml[stylus-iframe$$=\"twitter.com\"] h1 { display:none }"
+    "message": "公開每個 iframe 中的頂級頁面網域。\n啟用編寫特別用於 iframe 的 CSS，如這個：\nhtml[atelier8d1-iframe$$=\"twitter.com\"] h1 { display:none }"
   },
   "optionsAdvancedExposeStyleName": {
     "message": "發佈樣式名稱"

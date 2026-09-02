@@ -920,10 +920,10 @@
     "message": "Dodaj 'Usuń' do menu kontekstowego edytora"
   },
   "optionsAdvancedExposeIframes": {
-    "message": "Odsłoń ramki pływające za pomocą <html[stylus-iframe]>"
+    "message": "Odsłoń ramki pływające za pomocą <html[atelier8d1-iframe]>"
   },
   "optionsAdvancedExposeIframesNote": {
-    "message": "Odsłania domenę najwyższego poziomu w każdym elemencie iframe.\nWłącza pisanie CSS specyficznych dla iframe w taki sposób:\nhtml[stylus-iframe$$=\"twitter.com\"] h1 { display:none }"
+    "message": "Odsłania domenę najwyższego poziomu w każdym elemencie iframe.\nWłącza pisanie CSS specyficznych dla iframe w taki sposób:\nhtml[atelier8d1-iframe$$=\"twitter.com\"] h1 { display:none }"
   },
   "optionsAdvancedExposeStyleName": {
     "message": "Eksponuj nazwę stylu"

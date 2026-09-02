@@ -67,7 +67,7 @@
     white-space: pre-line;
   }
 
-  [id=stylus-popup] & {
+  [id=atm8-library-popup] & {
     animation: none;
     > div {
       max-height: 100dvh;

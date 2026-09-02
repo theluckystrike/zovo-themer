@@ -749,10 +749,10 @@
     "message": "'Törlés' parancs a szerkesztő helyi menüjében"
   },
   "optionsAdvancedExposeIframes": {
-    "message": "<iframe>-ek kitevése <html[stylus-iframe]>-en keresztül"
+    "message": "<iframe>-ek kitevése <html[atelier8d1-iframe]>-en keresztül"
   },
   "optionsAdvancedExposeIframesNote": {
-    "message": "Az oldal felső tartományának jelölése minden iframe-ben.\nLehetővé teszi az iframe-specifikus CSS írását, mint pl.:\nhtml[stylus-iframe$$=\"twitter.com\"] h1 { display:none }"
+    "message": "Az oldal felső tartományának jelölése minden iframe-ben.\nLehetővé teszi az iframe-specifikus CSS írását, mint pl.:\nhtml[atelier8d1-iframe$$=\"twitter.com\"] h1 { display:none }"
   },
   "optionsBadgeDisabled": {
     "message": "Háttérszín, amikor le van tiltva"
