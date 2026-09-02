@@ -1,0 +1,261 @@
+import {kDisableAll, kSidebar, kStyleIds} from '@/js/consts';
+import {__values as __prefs, subscribe} from '@/js/prefs';
+import {CHROME, FIREFOX, MOBILE, VIVALDI} from '@/js/ua';
+import {debounce, deepCopy, NOP} from '@/js/util';
+import {
+  browserAction, browserSidebar, MF_ICON_EXT, MF_ICON_PATH, openSidebar, paintCanvas,
+  toggleListener,
+} from '@/js/util-webext';
+import * as colorScheme from './color-scheme';
+import {bgBusy, bgInit, onSchemeChange} from './common';
+import {removePreloadedStyles} from './style-via-webrequest';
+import {tabCache, set as tabSet} from './tab-manager';
+
+const staleBadges = new Set();
+/** @type {{ [url: string]: ImageData | Promise<ImageData> }} */
+const imageDataCache = {};
+// https://github.com/openstyles/stylus/issues/1287 Fenix can't use custom ImageData
+const FIREFOX_ANDROID = (__.B_FIREFOX || __.B_ANY && FIREFOX) && MOBILE;
+const ICON_SIZES =
+  !__.MV3 && VIVALDI ? [19, 38] : // old Vivaldi
+    __.MV3 || !(__.B_FIREFOX || __.B_ANY && FIREFOX) ? [16, 32] : // Chromium
+      MOBILE ? [32, 38] : // FF mobile 1x, 1.5x, 2x DPI // TODO: +48
+        [16, 32, 38]; // FF desktop toolbar and panel 1x, 1.5x, 2x DPI // TODO: 38->48, +64
+const kBadgeDisabled = 'badgeDisabled';
+const kBadgeNormal = 'badgeNormal';
+const kIconset = 'iconset';
+const kShowBadge = 'show-badge';
+// https://github.com/openstyles/stylus/issues/335
+let hasCanvas = FIREFOX_ANDROID ? false : null;
+let badgeError = '';
+
+if (browserAction) {
+  bgInit.push(initIcons);
+  if (browserSidebar) {
+    if (__.MV3) try {
+      // Gonna unregister in subscribe() if not enabled
+      toggleListener(browserAction.onClicked, true, openPopupInSidebar);
+    } catch (err) {
+      // Some browsers throw "unable to find toolbar item" for a button in the overflow menu
+      console.error(err);
+    }
+    subscribe('popup.sidePanel', (key, val) => {
+      try {
+        browserAction.setPopup({popup: val ? '' : 'popup.html'});
+        toggleListener(browserAction.onClicked, val, openPopupInSidebar);
+      } catch (err) {
+        console.error(err);
+      }
+    }, true);
+  }
+}
+
+onSchemeChange.add(() => {
+  if (__prefs[kIconset] === -1) {
+    debounce(refreshGlobalIcon);
+    debounce(refreshAllIcons);
+  }
+});
+
+export async function refreshIconsWhenReady() {
+  if (!browserAction)
+    return;
+  if (bgBusy) {
+    bgInit[bgInit.indexOf(initIcons)] = 0;
+    await bgBusy;
+  }
+  initIcons(true);
+}
+
+function initIcons(runNow = !__.MV3) {
+  subscribe([
+    kDisableAll,
+    kBadgeDisabled,
+    kBadgeNormal,
+  ], () => debounce(refreshIconBadgeColor), runNow);
+  subscribe([
+    kShowBadge,
+  ], () => debounce(refreshAllIconsBadgeText), runNow);
+  subscribe([
+    kDisableAll,
+    kIconset,
+  ], () => debounce(refreshAllIcons), runNow);
+}
+
+/**
+ * @param {(number|string)[]} styleIds
+ * @param {boolean} [lazyBadge] preventing flicker during page load
+ * @param {number} [iid] instance id
+ */
+export function updateIconBadge(styleIds, lazyBadge, iid) {
+  // FIXME: in some cases, we only have to redraw the badge. is it worth a optimization?
+  const {tab: {id: tabId}, TDM} = this.sender;
+  const frameId = TDM > 0 ? 0 : this.sender.frameId;
+  const value = styleIds.length ? styleIds.map(Number) : undefined;
+  if (tabId == null)
+    return;
+  tabSet(tabId, kStyleIds, frameId, value);
+  if (iid) tabSet(tabId, 'iid', frameId, (!__.MV3 || value) && iid);
+  debounce(refreshStaleBadges, frameId && lazyBadge ? 250 : 0);
+  staleBadges.add(tabId);
+  if (!frameId) refreshIcon(tabId, true);
+  removePreloadedStyles(null, tabId + ':' + frameId);
+}
+
+export function setErrorBadge(text) {
+  if (badgeError === text) {
+    return;
+  }
+  badgeError = text;
+  refreshIconBadgeColor();
+  const badge = {text: text ? 'x' : ''};
+  setBadgeText(badge);
+  for (let tabId in tabCache) {
+    tabId = +tabId;
+    if (badgeError) {
+      badge.tabId = tabId;
+      setBadgeText(badge);
+    } else {
+      refreshIconBadgeText(tabId);
+    }
+  }
+  browserAction.setTitle({
+    title: text || 'Stylus', // in Chrome an empty title is seemingly ignored
+  }).catch(NOP);
+}
+
+function refreshIconBadgeText(tabId) {
+  if (badgeError) return;
+  const text = __prefs[kShowBadge] ? `${getStyleCount(tabId)}` : '';
+  setBadgeText({tabId, text});
+}
+
+function getIconName(hasStyles = false) {
+  const i = __prefs[kIconset];
+  const prefix = i === 0 || i === -1 && colorScheme.isDark ? '' : 'light/';
+  const postfix = __prefs[kDisableAll] ? 'x' : !hasStyles ? 'w' : '';
+  return `${prefix}$SIZE$${postfix}`;
+}
+
+function refreshIcon(tabId, force = false) {
+  const td = tabCache[tabId] ??= (
+    __.DEBUGLOG('refreshIcon missing %d in tabCache', tabId, deepCopy(tabCache)),
+    {id: tabId}
+  );
+  const oldIcon = td.icon;
+  const newIcon = getIconName(td[kStyleIds]?.[0]);
+  // (changing the icon only for the main page, frameId = 0)
+  if (!force && oldIcon === newIcon) {
+    return;
+  }
+  tabSet(tabId, 'icon', newIcon);
+  setIcon({
+    path: getIconPath(newIcon),
+    tabId,
+  });
+}
+
+function getIconPath(icon) {
+  return ICON_SIZES.reduce(
+    (obj, size) => {
+      obj[size] = MF_ICON_PATH + icon.replace('$SIZE$', size) + MF_ICON_EXT;
+      return obj;
+    },
+    {}
+  );
+}
+
+/** @return {number | ''} */
+function getStyleCount(tabId) {
+  const allIds = new Set();
+  for (const frameData of Object.values(tabCache[tabId]?.[kStyleIds] || {}))
+    frameData.forEach(allIds.add, allIds);
+  return allIds.size || '';
+}
+
+// Caches imageData for icon paths
+async function loadImage(url) {
+  const img = __.B_CHROME || __.B_ANY && CHROME
+    ? await createImageBitmap(await (await fetch(url)).blob())
+    : await new Promise((resolve, reject) =>
+      Object.assign(new Image(), {
+        src: url,
+        onload: e => resolve(e.target),
+        onerror: reject,
+      }));
+  const {width: w, height: h} = img;
+  const result = paintCanvas(w, h, ctx => ctx.drawImage(img, 0, 0, w, h));
+  imageDataCache[url] = result;
+  return result;
+}
+
+/** @param {chrome.tabs.Tab} tab */
+function openPopupInSidebar(tab) {
+  openSidebar('popup.html?' + kSidebar, false, {tabId: tab.id});
+}
+
+function refreshGlobalIcon() {
+  setIcon({
+    path: getIconPath(getIconName()),
+  });
+}
+
+function refreshIconBadgeColor() {
+  setBadgeBackgroundColor({
+    color: badgeError ? '#F00' :
+      __prefs[__prefs[kDisableAll] ? kBadgeDisabled : kBadgeNormal],
+  });
+}
+
+function refreshAllIcons() {
+  __.DEBUGLOG('refreshAllIcons', deepCopy(tabCache));
+  for (const tabId in tabCache) {
+    refreshIcon(+tabId);
+  }
+  refreshGlobalIcon();
+}
+
+function refreshAllIconsBadgeText() {
+  __.DEBUGLOG('refreshAllIconsBadgeText', deepCopy(tabCache));
+  for (const tabId in tabCache) {
+    refreshIconBadgeText(+tabId);
+  }
+}
+
+function refreshStaleBadges() {
+  __.DEBUGLOG('refreshStaleBadges', [...staleBadges]);
+  for (const tabId of staleBadges) {
+    refreshIconBadgeText(tabId);
+  }
+  staleBadges.clear();
+}
+
+/** @param {browser.action._SetIconDetails} data */
+async function setIcon(data) {
+  if (hasCanvas == null) {
+    const url = MF_ICON_PATH + ICON_SIZES[0] + MF_ICON_EXT;
+    hasCanvas = imageDataCache[url] = loadImage(url);
+    hasCanvas = (await hasCanvas).data.some(b => b !== 255);
+  } else if (hasCanvas.then) {
+    await hasCanvas;
+  }
+  if (hasCanvas) {
+    data.imageData = {};
+    for (const [key, url] of Object.entries(data.path)) {
+      const val = imageDataCache[url] || (imageDataCache[url] = loadImage(url));
+      data.imageData[key] = val.then ? await val : val;
+    }
+    delete data.path;
+  }
+  browserAction.setIcon(data).catch(NOP);
+}
+
+/** @param {browser.action._SetBadgeTextDetails} data */
+function setBadgeText(data) {
+  browserAction.setBadgeText(data).catch(NOP);
+}
+
+/** @param {browser.action._SetBadgeBackgroundColorDetails} data */
+function setBadgeBackgroundColor(data) {
+  browserAction.setBadgeBackgroundColor(data).catch(NOP);
+}

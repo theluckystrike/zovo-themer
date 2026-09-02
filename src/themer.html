@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html id="atm8-root" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zovo Themer</title>
+  <%= htmlWebpackPlugin.tags.headTags %>
+</head>
+<body>
+  <main class="atm8-shell" aria-busy="true">
+    <header class="atm8-header">
+      <div class="atm8-mark" aria-hidden="true">
+        <img src="icon/48.png" alt="">
+      </div>
+      <div class="atm8-title-wrap">
+        <h1>Zovo Themer</h1>
+        <p id="atm8-host">Finding this site…</p>
+      </div>
+      <label class="atm8-master">
+        <input id="atm8-enabled" type="checkbox" role="switch" aria-label="Toggle visual theme" checked>
+        <span aria-hidden="true"></span>
+      </label>
+    </header>
+
+    <section class="atm8-hero" aria-labelledby="atm8-hero-title">
+      <div>
+        <p class="atm8-kicker">Live visual layer</p>
+        <h2 id="atm8-hero-title"><span id="atm8-live-count">4</span> controls live</h2>
+        <p class="atm8-sub">Tune the page without touching CSS.</p>
+      </div>
+      <div class="atm8-swatch" id="atm8-swatch" aria-hidden="true"></div>
+    </section>
+
+    <section class="atm8-card" aria-labelledby="atm8-palette-title">
+      <div class="atm8-section-head">
+        <h2 id="atm8-palette-title">Site palette</h2>
+        <span>Instant preview</span>
+      </div>
+      <div class="atm8-control-grid">
+        <label class="atm8-color-control">
+          <span>Accent</span>
+          <input id="atm8-accent" data-profile type="color" value="#7657d6" aria-label="Accent color">
+        </label>
+        <label class="atm8-color-control">
+          <span>Links</span>
+          <input id="atm8-link" data-profile type="color" value="#3157b7" aria-label="Link color">
+        </label>
+        <label class="atm8-range-control">
+          <span>Type size <output id="atm8-font-out">16px</output></span>
+          <input id="atm8-font" data-profile type="range" min="12" max="24" value="16" aria-label="Base font size">
+        </label>
+        <label class="atm8-range-control">
+          <span>Corners <output id="atm8-radius-out">10px</output></span>
+          <input id="atm8-radius" data-profile type="range" min="0" max="32" value="10" aria-label="Corner radius">
+        </label>
+      </div>
+    </section>
+
+    <section class="atm8-card atm8-comfort" aria-labelledby="atm8-comfort-title">
+      <div class="atm8-section-head">
+        <h2 id="atm8-comfort-title">Reading comfort</h2>
+        <span>Saved per domain</span>
+      </div>
+      <div class="atm8-pills" role="group" aria-label="Reading comfort presets">
+        <button type="button" data-comfort="contrast" aria-pressed="false">Contrast</button>
+        <button type="button" data-comfort="spacing" aria-pressed="false">Line space</button>
+        <button type="button" data-comfort="systemFont" aria-pressed="false">System font</button>
+      </div>
+    </section>
+
+    <section class="atm8-card atm8-rule-card" aria-labelledby="atm8-rules-title">
+      <div class="atm8-section-head">
+        <h2 id="atm8-rules-title">Picked element</h2>
+        <span id="atm8-rule-count">No rule yet</span>
+      </div>
+      <div id="atm8-rule-empty" class="atm8-empty">
+        <span class="atm8-cursor" aria-hidden="true">↖</span>
+        <p>Point at anything. Its first rule is created for you.</p>
+      </div>
+      <div id="atm8-rule-editor" class="atm8-rule-editor" hidden>
+        <code id="atm8-selector"></code>
+        <div class="atm8-rule-fields">
+          <select id="atm8-property" aria-label="Rule effect">
+            <option value="background">Fill color</option>
+            <option value="text">Text color</option>
+            <option value="radius">Corner radius</option>
+            <option value="hide">Hide element</option>
+          </select>
+          <input id="atm8-target-color" type="color" value="#7657d6" aria-label="Rule color">
+          <input id="atm8-target-radius" type="range" min="0" max="48" value="10" aria-label="Rule corner radius" hidden>
+          <button id="atm8-remove-rule" type="button" class="atm8-icon-button" aria-label="Remove picked rule">×</button>
+        </div>
+      </div>
+      <button id="atm8-pick" type="button" class="atm8-primary">
+        <span aria-hidden="true">⌖</span> Pick an element
+      </button>
+    </section>
+
+    <div class="atm8-actions">
+      <button id="atm8-export" type="button" class="atm8-secondary">Export .user.css</button>
+      <a href="manage.html" class="atm8-text-link">Advanced style library</a>
+    </div>
+
+    <section class="atm8-plan" aria-labelledby="atm8-plan-title">
+      <div>
+        <p id="atm8-plan-title"><span id="atm8-plan-badge">Free</span> Visual workspace</p>
+        <p id="atm8-plan-copy">One picked rule included. Controls and export stay free.</p>
+      </div>
+      <a id="atm8-pricing" href="https://zovo.one/pricing" target="_blank" rel="noopener">Get Pro</a>
+    </section>
+    <button id="atm8-key-toggle" class="atm8-key-toggle" type="button" aria-expanded="false">Already have a key?</button>
+    <form id="atm8-license-form" class="atm8-license-form" hidden>
+      <label for="atm8-license">License key</label>
+      <div>
+        <input id="atm8-license" autocomplete="off" spellcheck="false" maxlength="24"
+          placeholder="ZOVO-XXXX-XXXX-XXXX-XXXX">
+        <button id="atm8-activate" type="submit">Activate</button>
+      </div>
+      <button id="atm8-deactivate" type="button" hidden>Deactivate this device</button>
+    </form>
+
+    <p id="atm8-status" class="atm8-status" role="status" aria-live="polite"></p>
+  </main>
+  <%= htmlWebpackPlugin.tags.bodyTags %>
+</body>
+</html>

@@ -1,0 +1,11 @@
+*.zip
+*.tmp*
+webpack-profile*.json
+.DS_Store
+desktop.ini
+/.eslintcache
+/.vscode
+/.*.html
+/dist*/
+/node_modules/
+/yarn.lock
