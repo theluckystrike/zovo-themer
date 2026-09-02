@@ -9,6 +9,7 @@ const PROFILES_KEY = `${NS}.profiles.v1`;
 const LICENSE_KEY = `${NS}.license`;
 const LICENSE_CACHE_KEY = `${NS}.licenseCache`;
 const PICK_RESULT = `${NS}:picker-result`;
+const PICK_START = `${NS}:picker-start`;
 const APPLY_PROFILE = `${NS}:apply-profile`;
 const VERIFY_URL = 'https://zgubxqomnbmxgbdhvwja.supabase.co/functions/v1/verify-extension-license';
 const PRICING_URL = 'https://zovo.one/pricing';
@@ -210,84 +211,6 @@ async function verifyLicense(raw) {
   }
 }
 
-function installPicker(namespace) {
-  const oldStop = globalThis[`${namespace}PickerStop`];
-  if (typeof oldStop === 'function') oldStop();
-  const overlay = document.createElement('div');
-  const note = document.createElement('div');
-  const style = document.createElement('style');
-  style.textContent = `
-    [data-${namespace}-overlay] { position:fixed; z-index:2147483646; pointer-events:none;
-      border:2px solid #7657d6; background:rgba(118,87,214,.14); border-radius:5px;
-      box-shadow:0 0 0 1px rgba(255,255,255,.8) inset; }
-    [data-${namespace}-note] { position:fixed; z-index:2147483647; left:50%; top:18px;
-      transform:translateX(-50%); padding:10px 14px; border-radius:999px; color:white;
-      background:#181529; font:600 13px/1.2 system-ui; box-shadow:0 8px 24px rgba(0,0,0,.3); }
-  `;
-  overlay.dataset[`${namespace}Overlay`] = '';
-  note.dataset[`${namespace}Note`] = '';
-  note.textContent = 'Click an element to create its rule · Esc to cancel';
-  document.documentElement.append(style, overlay, note);
-
-  const selectorFor = element => {
-    if (element.id) return `#${CSS.escape(element.id)}`;
-    const path = [];
-    for (let el = element;
-      el && el.nodeType === 1 && el !== document.documentElement;
-      el = el.parentElement) {
-      let part = el.localName;
-      const classes = [...el.classList].filter(x => x.length < 40).slice(0, 2);
-      if (classes.length) part += classes.map(x => `.${CSS.escape(x)}`).join('');
-      const parent = el.parentElement;
-      if (parent) {
-        const same = [...parent.children]
-          .filter(child => child.localName === el.localName);
-        if (same.length > 1) part += `:nth-of-type(${same.indexOf(el) + 1})`;
-      }
-      path.unshift(part);
-      const candidate = path.join(' > ');
-      try { if (document.querySelectorAll(candidate).length === 1) return candidate; } catch {}
-      if (path.length === 5) break;
-    }
-    return path.join(' > ');
-  };
-  const move = event => {
-    const el = event.target;
-    if (!(el instanceof Element) || el === overlay || el === note) return;
-    const rect = el.getBoundingClientRect();
-    Object.assign(overlay.style, {
-      left: `${rect.left}px`,
-      top: `${rect.top}px`,
-      width: `${rect.width}px`,
-      height: `${rect.height}px`,
-    });
-  };
-  const stop = () => {
-    document.removeEventListener('pointermove', move, true);
-    document.removeEventListener('click', choose, true);
-    document.removeEventListener('keydown', keydown, true);
-    overlay.remove(); note.remove(); style.remove();
-    delete globalThis[`${namespace}PickerStop`];
-  };
-  const choose = event => {
-    const el = event.target;
-    if (!(el instanceof Element) || el === note) return;
-    event.preventDefault(); event.stopImmediatePropagation();
-    const computed = getComputedStyle(el);
-    const selector = selectorFor(el);
-    stop();
-    chrome.runtime.sendMessage({data: {
-      method: `${namespace}:picker-result`, selector, label: el.localName,
-      sample: {color: computed.color, backgroundColor: computed.backgroundColor},
-    }}).catch(() => {});
-  };
-  const keydown = event => { if (event.key === 'Escape') stop(); };
-  globalThis[`${namespace}PickerStop`] = stop;
-  document.addEventListener('pointermove', move, true);
-  document.addEventListener('click', choose, true);
-  document.addEventListener('keydown', keydown, true);
-}
-
 async function acceptPick(message, tab) {
   if (!tab?.id || !tab.url) return false;
   const host = normalizeHost(tab.url);
@@ -339,7 +262,8 @@ export const themerApi = {
     if (!cacheGrants(state.cache) && profile.targets.length >= FREE_RULE_LIMIT) {
       return {ok: false, reason: 'rule-limit'};
     }
-    await chrome.scripting.executeScript({target: {tabId}, func: installPicker, args: [NS]});
+    const armed = await chrome.tabs.sendMessage(tabId, {data: {method: PICK_START}});
+    if (armed?.ok !== true) throw new Error('Enable website access, then reload this page');
     return {ok: true};
   },
   async activateLicense(key) {

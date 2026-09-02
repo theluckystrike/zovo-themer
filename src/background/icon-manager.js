@@ -41,7 +41,7 @@ if (browserAction) {
     }
     subscribe('popup.sidePanel', (key, val) => {
       try {
-        browserAction.setPopup({popup: val ? '' : 'popup.html'});
+        browserAction.setPopup({popup: val ? '' : 'themer.html'});
         toggleListener(browserAction.onClicked, val, openPopupInSidebar);
       } catch (err) {
         console.error(err);

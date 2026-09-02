@@ -171,7 +171,6 @@ els.pick.addEventListener('click', async () => {
       return;
     }
     announce('Picker armed — click an element on the page');
-    window.close();
   } catch (error) {
     announce(error.message || 'The picker cannot run on this page', true);
   }
