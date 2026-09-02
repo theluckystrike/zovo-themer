@@ -35,6 +35,11 @@ automatically, by default every 24 hours. Those checks contact the style's
 configured source and may download updated CSS and style metadata. They do not
 download or execute remote JavaScript.
 
+The advanced style manager shows site favicons by default. To retrieve an icon,
+it sends the displayed style-target domain to DuckDuckGo's favicon service
+(`icons.duckduckgo.com`). This is used only to show the icon in the manager and
+can be disabled with the “Target icons” option.
+
 ## Permissions
 
 Access to websites is required to apply the selected visual changes on those
