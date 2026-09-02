@@ -42,7 +42,7 @@ button { color: inherit; }
   grid-template-columns: 36px 1fr auto;
   align-items: center;
   gap: 12px;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 .atm8-mark {
@@ -65,6 +65,7 @@ button { color: inherit; }
 }
 
 .atm8-master { position: relative; display: block; width: 44px; height: 26px; }
+.atm8-master::before { content: ''; position: absolute; inset: -8px 0; }
 .atm8-master input { position: absolute; opacity: 0; }
 .atm8-master span {
   display: block;
@@ -97,7 +98,7 @@ button { color: inherit; }
   justify-content: space-between;
   min-height: 104px;
   margin-bottom: 12px;
-  padding: 20px;
+  padding: 16px 20px;
   border: 1px solid rgba(118, 87, 214, .22);
   border-radius: 16px;
   background: linear-gradient(135deg, #fff 10%, #f6f1ff 100%);
@@ -112,7 +113,7 @@ button { color: inherit; }
   text-transform: uppercase;
 }
 .atm8-hero h2 { margin: 4px 0 0; font-size: 24px; line-height: 1.15; letter-spacing: -.03em; }
-.atm8-sub { margin: 5px 0 0; color: var(--atm8-muted); font-size: 12px; }
+.atm8-sub { margin: 4px 0 0; color: var(--atm8-muted); font-size: 12px; }
 .atm8-swatch {
   width: 56px;
   height: 56px;
@@ -132,7 +133,7 @@ button { color: inherit; }
 .atm8-section-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
 .atm8-section-head span { color: var(--atm8-muted); font-size: 11px; }
 .atm8-control-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 16px; }
-.atm8-color-control, .atm8-range-control { display: grid; gap: 6px; color: var(--atm8-muted); font-size: 12px; }
+.atm8-color-control, .atm8-range-control { display: grid; gap: 8px; color: var(--atm8-muted); font-size: 12px; }
 .atm8-color-control { grid-template-columns: 1fr auto; align-items: center; }
 .atm8-color-control input {
   width: 36px; height: 28px; padding: 2px; border: 1px solid var(--atm8-line);
@@ -145,7 +146,7 @@ input[type="range"] { width: 100%; accent-color: var(--atm8-accent); }
 
 .atm8-pills { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
 .atm8-pills button {
-  min-height: 36px;
+  min-height: 40px;
   padding: 0 8px;
   border: 1px solid var(--atm8-line);
   border-radius: 9px;
@@ -161,7 +162,7 @@ input[type="range"] { width: 100%; accent-color: var(--atm8-accent); }
   font-weight: 700;
 }
 
-.atm8-empty { display: flex; align-items: center; gap: 10px; min-height: 40px; margin-bottom: 12px; }
+.atm8-empty { display: flex; align-items: center; gap: 12px; min-height: 40px; margin-bottom: 12px; }
 .atm8-empty p { margin: 0; color: var(--atm8-muted); font-size: 12px; }
 .atm8-cursor {
   display: grid; width: 34px; height: 34px; flex: 0 0 auto; place-items: center;
@@ -169,15 +170,15 @@ input[type="range"] { width: 100%; accent-color: var(--atm8-accent); }
 }
 .atm8-rule-editor { margin-bottom: 12px; }
 .atm8-rule-editor code {
-  display: block; overflow: hidden; margin-bottom: 8px; padding: 8px 10px; border-radius: 8px;
+  display: block; overflow: hidden; margin-bottom: 8px; padding: 8px 12px; border-radius: 8px;
   background: var(--atm8-surface); color: var(--atm8-muted); font: 11px/1.35 ui-monospace, monospace;
   text-overflow: ellipsis; white-space: nowrap;
 }
 .atm8-rule-fields { display: grid; grid-template-columns: 1fr 40px 40px; gap: 8px; }
 .atm8-rule-fields select { min-width: 0; border: 1px solid var(--atm8-line); border-radius: 8px; background: var(--atm8-card); padding: 0 8px; }
-.atm8-rule-fields input[type="color"] { width: 40px; height: 36px; padding: 3px; border: 1px solid var(--atm8-line); border-radius: 8px; background: transparent; }
+.atm8-rule-fields input[type="color"] { width: 40px; height: 40px; padding: 4px; border: 1px solid var(--atm8-line); border-radius: 8px; background: transparent; }
 .atm8-rule-fields input[type="range"] { grid-column: span 1; }
-.atm8-icon-button { border: 1px solid var(--atm8-line); border-radius: 8px; background: transparent; cursor: pointer; font-size: 20px; }
+.atm8-icon-button { min-height: 40px; border: 1px solid var(--atm8-line); border-radius: 8px; background: transparent; cursor: pointer; font-size: 20px; }
 
 .atm8-primary, .atm8-secondary {
   min-height: 42px;
@@ -191,13 +192,13 @@ input[type="range"] { width: 100%; accent-color: var(--atm8-accent); }
 }
 .atm8-primary:hover { background: var(--atm8-accent-deep); }
 .atm8-actions { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 12px 0; }
-.atm8-secondary { padding: 0 14px; border: 1px solid var(--atm8-line); background: var(--atm8-card); }
+.atm8-secondary { padding: 0 16px; border: 1px solid var(--atm8-line); background: var(--atm8-card); }
 .atm8-text-link { color: var(--atm8-accent-deep); font-size: 12px; text-decoration: none; }
 .atm8-text-link:hover { text-decoration: underline; }
 
 .atm8-plan {
   display: flex; align-items: center; justify-content: space-between; gap: 12px;
-  padding: 12px 14px; border: 1px solid #ead8aa; border-radius: 12px; background: #fffaf0;
+  padding: 12px 16px; border: 1px solid #ead8aa; border-radius: 12px; background: #fffaf0;
 }
 .atm8-plan p { margin: 0; }
 .atm8-plan p:first-child { font-weight: 700; }
@@ -209,9 +210,9 @@ input[type="range"] { width: 100%; accent-color: var(--atm8-accent); }
   display: block; margin: 8px auto 0; border: 0; background: none; color: var(--atm8-muted); cursor: pointer; font-size: 11px;
 }
 .atm8-license-form { margin-top: 8px; padding: 12px; border: 1px solid var(--atm8-line); border-radius: 10px; background: var(--atm8-card); }
-.atm8-license-form label { display: block; margin-bottom: 6px; color: var(--atm8-muted); font-size: 11px; }
+.atm8-license-form label { display: block; margin-bottom: 8px; color: var(--atm8-muted); font-size: 11px; }
 .atm8-license-form > div { display: grid; grid-template-columns: 1fr auto; gap: 8px; }
-.atm8-license-form input { min-width: 0; height: 38px; border: 1px solid var(--atm8-line); border-radius: 8px; padding: 0 10px; text-transform: uppercase; }
+.atm8-license-form input { min-width: 0; height: 40px; border: 1px solid var(--atm8-line); border-radius: 8px; padding: 0 12px; text-transform: uppercase; }
 .atm8-license-form button { border: 0; border-radius: 8px; background: var(--atm8-ink); color: white; padding: 0 12px; cursor: pointer; }
 #atm8-deactivate { margin-top: 8px; background: transparent; color: var(--atm8-muted); padding: 0; font-size: 11px; }
 .atm8-status { min-height: 17px; margin: 8px 2px 0; color: var(--atm8-accent-deep); font-size: 11px; text-align: center; }
