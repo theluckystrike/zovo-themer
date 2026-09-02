@@ -58,4 +58,13 @@ for (const file of walk(root)) {
   if (text !== before) writeFileSync(file, text);
 }
 
+// webRequestBlocking is only grantable to policy-installed MV3 extensions.
+// The retained engine already degrades when it is absent, so omit it from the
+// public Chrome Web Store artifact while preserving ordinary webRequest use.
+const manifestFile = join(root, 'manifest.json');
+const manifest = JSON.parse(readFileSync(manifestFile, 'utf8'));
+manifest.permissions = manifest.permissions.filter(permission =>
+  permission !== 'webRequestBlocking');
+writeFileSync(manifestFile, JSON.stringify(manifest, null, 2) + '\n');
+
 console.log(`uniquified ${mapping.length} JS/CSS assets with ${marker} basenames`);
