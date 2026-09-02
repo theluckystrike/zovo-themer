@@ -6,6 +6,7 @@
   --atm8-line: #e5e0ec;
   --atm8-accent: #7657d6;
   --atm8-accent-deep: #5c3fbd;
+  --atm8-focus: #5c3fbd;
   --atm8-accent-wash: #f0ebff;
   --atm8-gold: #9a6500;
   --atm8-shadow: 0 16px 34px -26px rgba(50, 35, 88, .7);
@@ -218,7 +219,7 @@ input[type="range"] { width: 100%; accent-color: var(--atm8-accent); }
 .atm8-status { min-height: 17px; margin: 8px 2px 0; color: var(--atm8-accent-deep); font-size: 11px; text-align: center; }
 .atm8-status.atm8-error { color: #a63636; }
 
-:focus-visible { outline: 3px solid rgba(118, 87, 214, .35); outline-offset: 2px; }
+:focus-visible { outline: 3px solid var(--atm8-focus); outline-offset: 2px; }
 [hidden] { display: none !important; }
 
 @media (prefers-color-scheme: dark) {
@@ -226,6 +227,7 @@ input[type="range"] { width: 100%; accent-color: var(--atm8-accent); }
     --atm8-ink: #f4f1fb; --atm8-muted: #aaa4ba; --atm8-surface: #121019;
     --atm8-card: #1c1925; --atm8-line: #373142; --atm8-accent: #9a7cf0;
     --atm8-accent-deep: #b39cff; --atm8-accent-wash: #2b2441; --atm8-gold: #e2ad48;
+    --atm8-focus: #b39cff;
   }
   .atm8-hero { background: linear-gradient(135deg, #211c2d 10%, #281f3b 100%); }
   .atm8-plan { border-color: #5a4723; background: #261f15; }

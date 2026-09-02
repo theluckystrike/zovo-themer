@@ -1,6 +1,7 @@
 'use strict';
 
 const fs = require('fs');
+const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackProcessingPlugin = require('html-webpack-processing-plugin');
@@ -212,6 +213,10 @@ module.exports = [
       new HtmlWebpackProcessingPlugin(),
       new CopyPlugin({
         patterns: [
+          {from: path.resolve(__dirname, '..', 'LICENSE'),
+            to: DST + 'GPL-3.0-LICENSE.txt', toType: 'file'},
+          {from: path.resolve(__dirname, '..', 'SOURCE-LICENSE.md'),
+            to: DST + 'SOURCE-LICENSE.md', toType: 'file'},
           {context: SRC, from: 'icon/**', to: DST},
           {context: SRC + 'content', from: 'install*.js', to: DST + JS},
           {context: SRC, from: MANIFEST.replace('.', `?(-${FLAVOR}*).`), to: MANIFEST,
