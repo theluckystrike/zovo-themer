@@ -17,6 +17,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      # Public Supabase publishable key (client-side by design, shipped in every build).
+      # Same project and key that zovo-skiplist already commits in package.json.
+      SUPABASE_ANON_KEY: sb_publishable_RG4IVO9Qm23_xPzdQjdFPQ_QHBwbOLv
     strategy:
       matrix:
         build: [chrome-mv3, firefox, mv2]
