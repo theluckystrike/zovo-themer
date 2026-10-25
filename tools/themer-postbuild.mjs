@@ -6,7 +6,8 @@
 import {readdirSync, readFileSync, renameSync, statSync, writeFileSync} from 'node:fs';
 import {basename, dirname, join, relative, resolve} from 'node:path';
 
-const root = resolve(process.argv[2] || 'dist-chrome-mv3');
+// Same output dir rule as tools/webpack.vars.js (DST): plain `dist` on GitHub Actions.
+const root = resolve(process.argv[2] || (process.env.GITHUB_ACTIONS ? 'dist' : 'dist-chrome-mv3'));
 const marker = 'atelier-';
 
 function walk(dir) {
